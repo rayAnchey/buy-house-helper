@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>测试页面</title>
+    <script src="${basePath}/resources/adminlte/plugins/jQuery/jquery-2.2.3.min.js"></script>
+    <script type="text/javascript">
+    </script>
+    <style type="text/css">
+        p{
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+<h2>用户列表</h2>
+<div>
+    <ul>
+        <li  th:each="user:${userList}">
+            <span th:text="${user.id}"></span>-
+            <span th:text="${user.nickname}"></span>-
+            <span th:text="${user.email}"></span>-
+            <span th:text="${user.lastLoginTime}"></span>
+        </li>
+    </ul>
+</div>
+</body>
+</html>

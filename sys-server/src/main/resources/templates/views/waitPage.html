@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>龙豪礼</title>
+    <script src="${basePath}/resources/adminlte/plugins/jQuery/jquery-2.2.3.min.js"></script>
+    <script type="text/javascript">
+        $(function(){
+            function checkseq(){
+                window.location.href="/"
+            }
+            setInterval(checkseq,5000);// 注意函数名没有引号和括弧！
+        });
+    </script>
+    <style type="text/css">
+        p{
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <p>当前访问人数过多，请先排队</p>
+    <p>您前面还有<font id="seq">${seq}</font>个人</p>
+    <p>请不要离开该页面，排到您时会自动进入系统</p>
+</body>
+</html>
