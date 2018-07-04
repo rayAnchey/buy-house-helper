@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -10,37 +10,37 @@
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
   <!--  -->
   <!-- <link rel="shortcut icon" type="image/ico" href="http://www.datatables.net/favicon.ico" media="screen"> -->
-  <link rel="shortcut icon" type="image/x-icon" href="${basePath}/common/favicon.ico" media="screen" />
+  <link rel="shortcut icon" type="image/x-icon" th:href="@{${basePath}+'/common/favicon.ico'}" media="screen" />
   <!-- Bootstrap 3.3.6 -->
-  <link rel="stylesheet" href="${basePath}/adminlte/bootstrap/css/bootstrap.min.css">
+  <link rel="stylesheet" th:href="@{${basePath}+'/adminlte/bootstrap/css/bootstrap.min.css'}">
   <!-- Font Awesome -->
-  <link rel="stylesheet" href="${basePath}/common/libs/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" th:href="@{${basePath}+'/common/libs/font-awesome/css/font-awesome.min.css'}">
 
   <!-- AdminLTE Skins. Choose a skin from the css/skins
        folder instead of downloading all of them to reduce the load. -->
 
-  <link rel="stylesheet" href="${basePath}/common/css/base.css">
+  <link rel="stylesheet" th:href="@{${basePath}+'/common/css/base.css'}">
 
   <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
   <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
   <!--[if lt IE 9]>
-  <script src="${basePath}/common/libs/html5shiv/html5shiv.min.js"></script>
-  <script src="${basePath}/common/libs/respond/respond.min.js"></script>
+  <script th:src="@{${basePath}+'/common/libs/html5shiv/html5shiv.min.js'}"></script>
+  <script th:src="@{${basePath}+'/common/libs/respond/respond.min.js'}"></script>
   <![endif]-->
     <!-- table and edit -->
-	<link rel="stylesheet" href="${basePath}/adminlte/plugins/datatables/dataTables.bootstrap.css">
-	<link rel="stylesheet" href="${basePath}/adminlte/plugins/datatables/select.bootstrap.min.css">
-	<link rel="stylesheet" href="${basePath}/adminlte/plugins/bootstrap-validator/dist/css/bootstrap-validator.css"/>
-	<link rel="stylesheet" href="${basePath}/adminlte/plugins/iCheck/all.css">
+	<link rel="stylesheet" th:href="@{${basePath}+'/adminlte/plugins/datatables/dataTables.bootstrap.css'}">
+	<link rel="stylesheet" th:href="@{${basePath}+'/adminlte/plugins/datatables/select.bootstrap.min.css'}">
+	<link rel="stylesheet" th:href="@{${basePath}+'/adminlte/plugins/bootstrap-validator/dist/css/bootstrap-validator.css'}"/>
+	<link rel="stylesheet" th:href="@{${basePath}+'/adminlte/plugins/iCheck/all.css'}">
     <!-- daterangepicker -->
-    <!--<link rel="stylesheet" href="${basePath}/adminlte/plugins/daterangepicker/daterangepicker.css">-->
-	<link rel="stylesheet" href="${basePath}/adminlte/plugins/datepicker/datepicker3.css">
-    <link rel="stylesheet" href="${basePath}/adminlte/plugins/select2/select2.min.css">
+    <!--<link rel="stylesheet" th:href="@{${basePath}+'/adminlte/plugins/daterangepicker/daterangepicker.css'}">-->
+	<link rel="stylesheet" th:href="@{${basePath}+'/adminlte/plugins/datepicker/datepicker3.css'}">
+    <link rel="stylesheet" th:href="@{${basePath}+'/adminlte/plugins/select2/select2.min.css'}">
 	<!-- treeview -->
-	<link rel="stylesheet" href="${basePath}/adminlte/plugins/bootstrap-treeview/bootstrap-treeview.min.css" />
+	<link rel="stylesheet" th:href="@{${basePath}+'/adminlte/plugins/bootstrap-treeview/bootstrap-treeview.min.css'}" />
   <!-- Theme style -->
-  <link rel="stylesheet" href="${basePath}/adminlte/dist/css/AdminLTE.min.css">
-  <link rel="stylesheet" href="${basePath}/adminlte/dist/css/skins/_all-skins.css">
+  <link rel="stylesheet" th:href="@{${basePath}+'/adminlte/dist/css/AdminLTE.min.css'}">
+  <link rel="stylesheet" th:href="@{${basePath}+'/adminlte/dist/css/skins/_all-skins.css'}">
 
 </head>
 <body class="hold-transition skin-blue sidebar-mini sidebar-collapse fixed">
@@ -50,7 +50,7 @@
   <header class="main-header">
 
     <!-- Logo -->
-    <a href="${basePath}/main" class="logo">
+    <a th:href="@{${basePath}+'/main'}" class="logo">
       <!-- mini logo for sidebar mini 50x50 pixels -->
       <span class="logo-mini"><b>E</b>AP</span>
       <!-- logo for regular state and mobile devices -->
@@ -81,7 +81,7 @@
                   <li><!-- start message -->
                     <a href="#">
                       <div class="pull-left">
-                        <img src="${basePath}/adminlte/dist/img/user0-160x160.jpg" class="img-circle" alt="User Image">
+                        <img th:src="@{${basePath}+'/adminlte/dist/img/user0-160x160.jpg'}" class="img-circle" alt="User Image">
                       </div>
                       <h4>
                         Support Team
@@ -94,7 +94,7 @@
                   <li>
                     <a href="#">
                       <div class="pull-left">
-                        <img src="${basePath}/adminlte/dist/img/user3-128x128.jpg" class="img-circle" alt="User Image">
+                        <img th:src="@{${basePath}+'/adminlte/dist/img/user3-128x128.jpg'}" class="img-circle" alt="User Image">
                       </div>
                       <h4>
                         AdminLTE Design Team
@@ -106,7 +106,7 @@
                   <li>
                     <a href="#">
                       <div class="pull-left">
-                        <img src="${basePath}/adminlte/dist/img/user4-128x128.jpg" class="img-circle" alt="User Image">
+                        <img th:src="@{${basePath}+'/adminlte/dist/img/user4-128x128.jpg'}" class="img-circle" alt="User Image">
                       </div>
                       <h4>
                         Developers
@@ -118,7 +118,7 @@
                   <li>
                     <a href="#">
                       <div class="pull-left">
-                        <img src="${basePath}/adminlte/dist/img/user3-128x128.jpg" class="img-circle" alt="User Image">
+                        <img th:src="@{${basePath}+'/adminlte/dist/img/user3-128x128.jpg'}" class="img-circle" alt="User Image">
                       </div>
                       <h4>
                         Sales Department
@@ -130,7 +130,7 @@
                   <li>
                     <a href="#">
                       <div class="pull-left">
-                        <img src="${basePath}/adminlte/dist/img/user4-128x128.jpg" class="img-circle" alt="User Image">
+                        <img th:src="@{${basePath}+'/adminlte/dist/img/user4-128x128.jpg'}" class="img-circle" alt="User Image">
                       </div>
                       <h4>
                         Reviewers
@@ -263,13 +263,13 @@
           <!-- User Account: style can be found in dropdown.less -->
           <li class="dropdown user user-menu">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-              <img src="${basePath}/adminlte/dist/img/user0-160x160.jpg" class="user-image" alt="User Image">
+              <img th:src="@{${basePath}+'/adminlte/dist/img/user0-160x160.jpg'}" class="user-image" alt="User Image">
               <span class="hidden-xs">${user.name}</span>
             </a>
             <ul class="dropdown-menu">
               <!-- User image -->
               <li class="user-header">
-                <img src="${basePath}/adminlte/dist/img/user0-160x160.jpg" class="img-circle" alt="User Image">
+                <img th:src="@{${basePath}+'/adminlte/dist/img/user0-160x160.jpg'}" class="img-circle" alt="User Image">
 
                 <p>
                   ${user.name} - Web Developer
@@ -297,7 +297,7 @@
                   <a href="#" class="btn btn-default btn-flat">Profile</a>
                 </div>
                 <div class="pull-right">
-                  <a href="${basePath}/logout" class="btn btn-default btn-flat">注销</a>
+                  <a th:href="@{${basePath}+'/logout'}" class="btn btn-default btn-flat">注销</a>
                 </div>
               </li>
             </ul>
@@ -318,7 +318,7 @@
       <!-- Sidebar user panel -->
       <div class="user-panel">
         <div class="pull-left image">
-          <img src="${basePath}/adminlte/dist/img/user0-160x160.jpg" class="img-circle" alt="User Image">
+          <img th:src="@{${basePath}+'/adminlte/dist/img/user0-160x160.jpg'}" class="img-circle" alt="User Image">
         </div>
         <div class="pull-left info">
           <p>Alexander Pierce</p>
@@ -553,43 +553,43 @@
 <script type="text/javascript">
 </script>
 <!-- jQuery 2.2.0 -->
-<script src="/adminlte/plugins/jQuery/jQuery-2.2.0.min.js"></script>
+<script src="/adminlte/plugins/jQuery/jQuery-2.2.0.min.js'}"></script>
 <!--JSON2-->
-<script src="${basePath}/common/json/json2.js"></script>
+<script th:src="@{${basePath}+'/common/json/json2.js'}"></script>
 <!-- Bootstrap 3.3.6 -->
-<script src="${basePath}/adminlte/bootstrap/js/bootstrap.min.js"></script>
+<script th:src="@{${basePath}+'/adminlte/bootstrap/js/bootstrap.min.js'}"></script>
 <!-- FastClick -->
-<script src="${basePath}/adminlte/plugins/fastclick/fastclick.js"></script>
+<script th:src="@{${basePath}+'/adminlte/plugins/fastclick/fastclick.js'}"></script>
 <!-- AdminLTE App -->
-<script src="${basePath}/adminlte/dist/js/app.min.js"></script>
+<script th:src="@{${basePath}+'/adminlte/dist/js/app.min.js'}"></script>
 
 <!-- dataTable -->
-<script src="${basePath}/adminlte/plugins/datatables/jquery.dataTables.js"></script>
-<script	src="${basePath}/adminlte/plugins/datatables/dataTables.bootstrap.min.js"></script>
-<script src="${basePath}/common/js/dataTables.js"></script>
+<script th:src="@{${basePath}+'/adminlte/plugins/datatables/jquery.dataTables.js'}"></script>
+<script	th:src="@{${basePath}+'/adminlte/plugins/datatables/dataTables.bootstrap.min.js'}"></script>
+<script th:src="@{${basePath}+'/common/js/dataTables.js'}"></script>
 <!-- form -->
-<script src="${basePath}/adminlte/plugins/bootstrap-validator/dist/js/bootstrap-validator.js"></script>
-<script src="${basePath}/adminlte/plugins/iCheck/icheck.min.js"></script>
+<script th:src="@{${basePath}+'/adminlte/plugins/bootstrap-validator/dist/js/bootstrap-validator.js'}"></script>
+<script th:src="@{${basePath}+'/adminlte/plugins/iCheck/icheck.min.js'}"></script>
 
 <!--daterangepicker-->
-<!--<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.11.2/moment.min.js"></script>
-<script src="${basePath}/adminlte/plugins/daterangepicker/daterangepicker.js"></script>-->
+<!--<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.11.2/moment.min.js'}"></script>
+<script th:src="@{${basePath}+'/adminlte/plugins/daterangepicker/daterangepicker.js'}"></script>-->
 
-<script src="${basePath}/adminlte/plugins/datepicker/bootstrap-datepicker.js"></script>
-<script src="${basePath}/adminlte/plugins/datepicker/locales/bootstrap-datepicker.zh-CN.js"></script>
+<script th:src="@{${basePath}+'/adminlte/plugins/datepicker/bootstrap-datepicker.js'}"></script>
+<script th:src="@{${basePath}+'/adminlte/plugins/datepicker/locales/bootstrap-datepicker.zh-CN.js'}"></script>
 <!-- treeview -->
-<script src="${basePath}/adminlte/plugins/bootstrap-treeview/bootstrap-treeview.min.js"></script>
+<script th:src="@{${basePath}+'/adminlte/plugins/bootstrap-treeview/bootstrap-treeview.min.js'}"></script>
 
 <!-- AdminLTE for demo purposes -->
-<script src="${basePath}/adminlte/dist/js/demo.js"></script>
+<script th:src="@{${basePath}+'/adminlte/dist/js/demo.js'}"></script>
 <!--select2-->
-<script src="${basePath}/adminlte/plugins/select2/select2.full.min.js"></script>
+<script th:src="@{${basePath}+'/adminlte/plugins/select2/select2.full.min.js'}"></script>
 
-<script type="text/javascript" src="${basePath}/common/js/base.js"></script>
-<script type="text/javascript" src="${basePath}/common/js/base-modal.js"></script>
-<script type="text/javascript" src="${basePath}/common/js/base-form.js"></script>
-<script type="text/javascript" src="${basePath}/common/js/base-datasource.js"></script>
-<script type="text/javascript" src="${basePath}/common/js/base-org.js"></script>
+<script type="text/javascript" th:src="@{${basePath}+'/common/js/base.js'}"></script>
+<script type="text/javascript" th:src="@{${basePath}+'/common/js/base-modal.js'}"></script>
+<script type="text/javascript" th:src="@{${basePath}+'/common/js/base-form.js'}"></script>
+<script type="text/javascript" th:src="@{${basePath}+'/common/js/base-datasource.js'}"></script>
+<script type="text/javascript" th:src="@{${basePath}+'/common/js/base-org.js'}"></script>
 <!-- 加入页面的的脚本 -->
 <script>
    //加载菜单

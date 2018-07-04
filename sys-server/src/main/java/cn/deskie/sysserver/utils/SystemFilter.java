@@ -28,6 +28,7 @@ public class SystemFilter implements Filter {
     private static PatternMatcher pathMatcher=new AntPathMatcher();
 
 
+    @Override
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException,
             ServletException {
 
@@ -37,19 +38,19 @@ public class SystemFilter implements Filter {
         System.out.println(request.getRequestURL());
         String basePath = request.getContextPath();
         request.setAttribute("basePath", basePath);
-        request.setAttribute("isauth", SecurityUtils.getSubject().isAuthenticated());
-        if (!SecurityUtils.getSubject().isAuthenticated()) {
-            //判断session里是否有用户信息
-            if (request.getHeader("x-requested-with") != null
-                    && request.getHeader("x-requested-with").equalsIgnoreCase("XMLHttpRequest")) {
-                //如果是ajax请求响应头会有，x-requested-with
-                //如果是anno的请求，则直接通过
-                if (!matchAnonPath(request.getRequestURI(),basePath)) {
-                    response.setHeader("session-status", "timeout");//在响应头设置session状态
-                    return;
-                }
-            }
-        }
+//        request.setAttribute("isauth", SecurityUtils.getSubject().isAuthenticated());
+//        if (!SecurityUtils.getSubject().isAuthenticated()) {
+//            //判断session里是否有用户信息
+//            if (request.getHeader("x-requested-with") != null
+//                    && request.getHeader("x-requested-with").equalsIgnoreCase("XMLHttpRequest")) {
+//                //如果是ajax请求响应头会有，x-requested-with
+//                //如果是anno的请求，则直接通过
+//                if (!matchAnonPath(request.getRequestURI(),basePath)) {
+//                    response.setHeader("session-status", "timeout");//在响应头设置session状态
+//                    return;
+//                }
+//            }
+//        }
         filterChain.doFilter(request, servletResponse);
 
     }
