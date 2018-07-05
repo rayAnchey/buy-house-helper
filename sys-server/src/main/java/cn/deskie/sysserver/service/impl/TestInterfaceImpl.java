@@ -27,6 +27,6 @@ public class TestInterfaceImpl implements TestInterface {
 
     @Override
     public List<User> findAll() {
-        return userMapper.getAllUser();
+        return null;
     }
 }

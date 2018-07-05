@@ -77,7 +77,7 @@ public class ImportExcel {
 	 */
 	public ImportExcel(File file, int headerNum) 
 			throws InvalidFormatException, IOException {
-		this(file, headerNum, 0);
+		this(file, headerNum, 0,0);
 	}
 
 	/**
@@ -90,7 +90,7 @@ public class ImportExcel {
 	 */
 	public ImportExcel(String fileName, int headerNum, int sheetIndex) 
 			throws InvalidFormatException, IOException {
-		this(new File(fileName), headerNum, sheetIndex);
+		this(new File(fileName), headerNum, sheetIndex,0);
 	}
 	
 	/**
@@ -101,9 +101,9 @@ public class ImportExcel {
 	 * @throws InvalidFormatException 
 	 * @throws IOException 
 	 */
-	public ImportExcel(File file, int headerNum, int sheetIndex) 
+	public ImportExcel(File file, int headerNum, int sheetIndex,int column)
 			throws InvalidFormatException, IOException {
-		this(file.getName(), new FileInputStream(file), headerNum, sheetIndex);
+		this(file.getName(), new FileInputStream(file), headerNum, sheetIndex,column);
 	}
 	
 	/**
@@ -116,7 +116,7 @@ public class ImportExcel {
 	 */
 	public ImportExcel(MultipartFile multipartFile, int headerNum, int sheetIndex)
 			throws InvalidFormatException, IOException {
-		this(multipartFile.getOriginalFilename(), multipartFile.getInputStream(), headerNum, sheetIndex);
+		this(multipartFile.getOriginalFilename(), multipartFile.getInputStream(), headerNum, sheetIndex,0);
 	}
 
 	/**
@@ -127,7 +127,7 @@ public class ImportExcel {
 	 * @throws InvalidFormatException 
 	 * @throws IOException 
 	 */
-	public ImportExcel(String fileName, InputStream is, int headerNum, int sheetIndex) 
+	public ImportExcel(String fileName, InputStream is, int headerNum, int sheetIndex,int column)
 			throws InvalidFormatException, IOException {
 		if (StringUtils.isBlank(fileName)){
 			throw new RuntimeException("导入文档为空!");
@@ -287,7 +287,7 @@ public class ImportExcel {
 		List<E> dataList = Lists.newArrayList();
 		for (int i = this.getDataRowNum(); i < this.getLastDataRowNum(); i++) {
 			E e = (E)cls.newInstance();
-			int column = 0;
+			int column = 1;
 			Row row = this.getRow(i);
 			StringBuilder sb = new StringBuilder();
 			for (Object[] os : annotationList){
@@ -364,22 +364,13 @@ public class ImportExcel {
 		return dataList;
 	}
 
-//	/**
-//	 * 导入测试
-//	 */
-//	public static void main(String[] args) throws Throwable {
-//		
-//		ImportExcel ei = new ImportExcel("target/export.xlsx", 1);
-//		
-//		for (int i = ei.getDataRowNum(); i < ei.getLastDataRowNum(); i++) {
-//			Row row = ei.getRow(i);
-//			for (int j = 0; j < ei.getLastCellNum(); j++) {
-//				Object val = ei.getCellValue(row, j);
-//				System.out.print(val+", ");
-//			}
-//			System.out.print("\n");
-//		}
-//		
-//	}
+	/**
+	 * 导入测试
+	 */
+	public static void main(String[] args) throws Throwable {
+
+
+
+	}
 
 }

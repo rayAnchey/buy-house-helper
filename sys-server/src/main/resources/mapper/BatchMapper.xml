@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.deskie.sysserver.mapper.BatchMapper">
+  <resultMap id="BaseResultMap" type="cn.deskie.sysentity.entity.Batch">
+    <id column="id" jdbcType="VARCHAR" property="id" />
+    <result column="reference" jdbcType="VARCHAR" property="reference" />
+    <result column="batch_name" jdbcType="VARCHAR" property="batchName" />
+    <result column="public_time" jdbcType="TIMESTAMP" property="publicTime" />
+    <result column="page_url" jdbcType="VARCHAR" property="pageUrl" />
+    <result column="attachment_url" jdbcType="VARCHAR" property="attachmentUrl" />
+    <result column="attachment_name" jdbcType="VARCHAR" property="attachmentName" />
+    <result column="is_downloaded" jdbcType="VARCHAR" property="isDownloaded" />
+    <result column="is_resolved" jdbcType="VARCHAR" property="isResolved" />
+    <result column="add_time" jdbcType="TIMESTAMP" property="addTime" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, reference, batch_name, public_time, page_url, attachment_url, attachment_name, 
+    is_downloaded, is_resolved, add_time, update_time
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from batch
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from batch
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="cn.deskie.sysentity.entity.Batch">
+    insert into batch (id, reference, batch_name, 
+      public_time, page_url, attachment_url, 
+      attachment_name, is_downloaded, is_resolved, 
+      add_time, update_time)
+    values (#{id,jdbcType=VARCHAR}, #{reference,jdbcType=VARCHAR}, #{batchName,jdbcType=VARCHAR}, 
+      #{publicTime,jdbcType=TIMESTAMP}, #{pageUrl,jdbcType=VARCHAR}, #{attachmentUrl,jdbcType=VARCHAR}, 
+      #{attachmentName,jdbcType=VARCHAR}, #{isDownloaded,jdbcType=VARCHAR}, #{isResolved,jdbcType=VARCHAR}, 
+      #{addTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="cn.deskie.sysentity.entity.Batch">
+    insert into batch
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="reference != null">
+        reference,
+      </if>
+      <if test="batchName != null">
+        batch_name,
+      </if>
+      <if test="publicTime != null">
+        public_time,
+      </if>
+      <if test="pageUrl != null">
+        page_url,
+      </if>
+      <if test="attachmentUrl != null">
+        attachment_url,
+      </if>
+      <if test="attachmentName != null">
+        attachment_name,
+      </if>
+      <if test="isDownloaded != null">
+        is_downloaded,
+      </if>
+      <if test="isResolved != null">
+        is_resolved,
+      </if>
+      <if test="addTime != null">
+        add_time,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="reference != null">
+        #{reference,jdbcType=VARCHAR},
+      </if>
+      <if test="batchName != null">
+        #{batchName,jdbcType=VARCHAR},
+      </if>
+      <if test="publicTime != null">
+        #{publicTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="pageUrl != null">
+        #{pageUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="attachmentUrl != null">
+        #{attachmentUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="attachmentName != null">
+        #{attachmentName,jdbcType=VARCHAR},
+      </if>
+      <if test="isDownloaded != null">
+        #{isDownloaded,jdbcType=VARCHAR},
+      </if>
+      <if test="isResolved != null">
+        #{isResolved,jdbcType=VARCHAR},
+      </if>
+      <if test="addTime != null">
+        #{addTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.deskie.sysentity.entity.Batch">
+    update batch
+    <set>
+      <if test="reference != null">
+        reference = #{reference,jdbcType=VARCHAR},
+      </if>
+      <if test="batchName != null">
+        batch_name = #{batchName,jdbcType=VARCHAR},
+      </if>
+      <if test="publicTime != null">
+        public_time = #{publicTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="pageUrl != null">
+        page_url = #{pageUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="attachmentUrl != null">
+        attachment_url = #{attachmentUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="attachmentName != null">
+        attachment_name = #{attachmentName,jdbcType=VARCHAR},
+      </if>
+      <if test="isDownloaded != null">
+        is_downloaded = #{isDownloaded,jdbcType=VARCHAR},
+      </if>
+      <if test="isResolved != null">
+        is_resolved = #{isResolved,jdbcType=VARCHAR},
+      </if>
+      <if test="addTime != null">
+        add_time = #{addTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.deskie.sysentity.entity.Batch">
+    update batch
+    set reference = #{reference,jdbcType=VARCHAR},
+      batch_name = #{batchName,jdbcType=VARCHAR},
+      public_time = #{publicTime,jdbcType=TIMESTAMP},
+      page_url = #{pageUrl,jdbcType=VARCHAR},
+      attachment_url = #{attachmentUrl,jdbcType=VARCHAR},
+      attachment_name = #{attachmentName,jdbcType=VARCHAR},
+      is_downloaded = #{isDownloaded,jdbcType=VARCHAR},
+      is_resolved = #{isResolved,jdbcType=VARCHAR},
+      add_time = #{addTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>

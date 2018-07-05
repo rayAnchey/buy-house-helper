@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.deskie.sysserver.mapper.ParamMapper">
+  <resultMap id="BaseResultMap" type="cn.deskie.sysentity.entity.Param">
+    <result column="id" jdbcType="VARCHAR" property="id" />
+    <result column="param_code" jdbcType="VARCHAR" property="paramCode" />
+    <result column="param_name" jdbcType="VARCHAR" property="paramName" />
+    <result column="param_type" jdbcType="VARCHAR" property="paramType" />
+    <result column="param_value" jdbcType="VARCHAR" property="paramValue" />
+    <result column="param_desc" jdbcType="VARCHAR" property="paramDesc" />
+    <result column="parent_id" jdbcType="VARCHAR" property="parentId" />
+    <result column="add_person" jdbcType="VARCHAR" property="addPerson" />
+    <result column="add_time" jdbcType="TIMESTAMP" property="addTime" />
+    <result column="update_person" jdbcType="VARCHAR" property="updatePerson" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+  </resultMap>
+  <insert id="insert" parameterType="cn.deskie.sysentity.entity.Param">
+    insert into param (id, param_code, param_name, 
+      param_type, param_value, param_desc, 
+      parent_id, add_person, add_time, 
+      update_person, update_time)
+    values (#{id,jdbcType=VARCHAR}, #{paramCode,jdbcType=VARCHAR}, #{paramName,jdbcType=VARCHAR}, 
+      #{paramType,jdbcType=VARCHAR}, #{paramValue,jdbcType=VARCHAR}, #{paramDesc,jdbcType=VARCHAR}, 
+      #{parentId,jdbcType=VARCHAR}, #{addPerson,jdbcType=VARCHAR}, #{addTime,jdbcType=TIMESTAMP}, 
+      #{updatePerson,jdbcType=VARCHAR}, #{updateTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="cn.deskie.sysentity.entity.Param">
+    insert into param
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="paramCode != null">
+        param_code,
+      </if>
+      <if test="paramName != null">
+        param_name,
+      </if>
+      <if test="paramType != null">
+        param_type,
+      </if>
+      <if test="paramValue != null">
+        param_value,
+      </if>
+      <if test="paramDesc != null">
+        param_desc,
+      </if>
+      <if test="parentId != null">
+        parent_id,
+      </if>
+      <if test="addPerson != null">
+        add_person,
+      </if>
+      <if test="addTime != null">
+        add_time,
+      </if>
+      <if test="updatePerson != null">
+        update_person,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="paramCode != null">
+        #{paramCode,jdbcType=VARCHAR},
+      </if>
+      <if test="paramName != null">
+        #{paramName,jdbcType=VARCHAR},
+      </if>
+      <if test="paramType != null">
+        #{paramType,jdbcType=VARCHAR},
+      </if>
+      <if test="paramValue != null">
+        #{paramValue,jdbcType=VARCHAR},
+      </if>
+      <if test="paramDesc != null">
+        #{paramDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="parentId != null">
+        #{parentId,jdbcType=VARCHAR},
+      </if>
+      <if test="addPerson != null">
+        #{addPerson,jdbcType=VARCHAR},
+      </if>
+      <if test="addTime != null">
+        #{addTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatePerson != null">
+        #{updatePerson,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+</mapper>

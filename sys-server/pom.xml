@@ -24,7 +24,21 @@
 	</properties>
 
 	<dependencies>
-
+		<dependency>
+			<groupId>cn.deskie</groupId>
+			<artifactId>sys-interface</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
+		<dependency>
+		<groupId>cn.deskie</groupId>
+			<artifactId>sys-entity</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
+		<dependency>
+			<groupId>cn.deskie</groupId>
+			<artifactId>sys-interface</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
 	</dependencies>
 
 	<build>

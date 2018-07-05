@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.deskie.sysserver.mapper.ProjectMapper">
+  <resultMap id="BaseResultMap" type="cn.deskie.sysentity.entity.Project">
+    <id column="id" jdbcType="VARCHAR" property="id" />
+    <result column="batch_no" jdbcType="VARCHAR" property="batchNo" />
+    <result column="batch_id" jdbcType="VARCHAR" property="batchId" />
+    <result column="project_name" jdbcType="VARCHAR" property="projectName" />
+    <result column="developer" jdbcType="VARCHAR" property="developer" />
+    <result column="address" jdbcType="VARCHAR" property="address" />
+    <result column="project_type" jdbcType="VARCHAR" property="projectType" />
+    <result column="build_no" jdbcType="VARCHAR" property="buildNo" />
+    <result column="area_no" jdbcType="VARCHAR" property="areaNo" />
+    <result column="count" jdbcType="INTEGER" property="count" />
+    <result column="public_time" jdbcType="TIMESTAMP" property="publicTime" />
+    <result column="add_time" jdbcType="TIMESTAMP" property="addTime" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, batch_no, batch_id, project_name, developer, address, project_type, build_no, area_no, count,
+    public_time, add_time, update_time
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from project
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from project
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="cn.deskie.sysentity.entity.Project">
+    insert into project (id, batch_no, batch_id, 
+      project_name, developer, address, project_type
+      build_no, area_no, count, 
+      public_time, add_time, update_time
+      )
+    values (#{id,jdbcType=VARCHAR}, #{batchNo,jdbcType=VARCHAR}, #{batchId,jdbcType=VARCHAR}, 
+      #{projectName,jdbcType=VARCHAR}, #{developer,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR}, #{projectType,jdbcType=VARCHAR},
+      #{buildNo,jdbcType=VARCHAR}, #{areaNo,jdbcType=VARCHAR}, #{count,jdbcType=INTEGER}, 
+      #{publicTime,jdbcType=TIMESTAMP}, #{addTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+
+  <update id="updateByPrimaryKeySelective" parameterType="cn.deskie.sysentity.entity.Project">
+    update project
+    <set>
+      <if test="batchNo != null">
+        batch_no = #{batchNo,jdbcType=VARCHAR},
+      </if>
+      <if test="batchId != null">
+        batch_id = #{batchId,jdbcType=VARCHAR},
+      </if>
+      <if test="projectName != null">
+        project_name = #{projectName,jdbcType=VARCHAR},
+      </if>
+      <if test="developer != null">
+        developer = #{developer,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null">
+        address = #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null">
+        project_type = #{projectType,jdbcType=VARCHAR},
+      </if>
+      <if test="buildNo != null">
+        build_no = #{buildNo,jdbcType=VARCHAR},
+      </if>
+      <if test="areaNo != null">
+        area_no = #{areaNo,jdbcType=VARCHAR},
+      </if>
+      <if test="count != null">
+        count = #{count,jdbcType=INTEGER},
+      </if>
+      <if test="publicTime != null">
+        public_time = #{publicTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="addTime != null">
+        add_time = #{addTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.deskie.sysentity.entity.Project">
+    update project
+    set batch_no = #{batchNo,jdbcType=VARCHAR},
+      batch_id = #{batchId,jdbcType=VARCHAR},
+      project_name = #{projectName,jdbcType=VARCHAR},
+      developer = #{developer,jdbcType=VARCHAR},
+      address = #{address,jdbcType=VARCHAR},
+      project_type = #{projectType,jdbcType=VARCHAR},
+      build_no = #{buildNo,jdbcType=VARCHAR},
+      area_no = #{areaNo,jdbcType=VARCHAR},
+      count = #{count,jdbcType=INTEGER},
+      public_time = #{publicTime,jdbcType=TIMESTAMP},
+      add_time = #{addTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>
