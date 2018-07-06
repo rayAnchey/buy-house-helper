@@ -35,7 +35,7 @@ public class Project implements Serializable {
     private Date addTime;
 
     private Date updateTime;
-
+    @ExcelField(title="序号",type = 2,align=2, sort=1)
     public String getId() {
         return id;
     }

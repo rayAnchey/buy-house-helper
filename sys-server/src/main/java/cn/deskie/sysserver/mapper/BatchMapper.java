@@ -2,6 +2,8 @@ package cn.deskie.sysserver.mapper;
 
 import cn.deskie.sysentity.entity.Batch;
 
+import java.util.List;
+
 public interface BatchMapper {
     int deleteByPrimaryKey(String id);
 
@@ -14,4 +16,6 @@ public interface BatchMapper {
     int updateByPrimaryKeySelective(Batch record);
 
     int updateByPrimaryKey(Batch record);
+
+    int batchSave(List<Batch> list);
 }

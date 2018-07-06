@@ -55,7 +55,7 @@ public class ImportExcel {
 	 * 标题行号
 	 */
 	private int headerNum;
-	
+
 	/**
 	 * 构造函数
 	 * @param fileName 导入文件，读取第一个工作表
@@ -77,7 +77,7 @@ public class ImportExcel {
 	 */
 	public ImportExcel(File file, int headerNum) 
 			throws InvalidFormatException, IOException {
-		this(file, headerNum, 0,0);
+		this(file, headerNum, 0);
 	}
 
 	/**
@@ -90,7 +90,7 @@ public class ImportExcel {
 	 */
 	public ImportExcel(String fileName, int headerNum, int sheetIndex) 
 			throws InvalidFormatException, IOException {
-		this(new File(fileName), headerNum, sheetIndex,0);
+		this(new File(fileName), headerNum, sheetIndex);
 	}
 	
 	/**
@@ -101,9 +101,9 @@ public class ImportExcel {
 	 * @throws InvalidFormatException 
 	 * @throws IOException 
 	 */
-	public ImportExcel(File file, int headerNum, int sheetIndex,int column)
+	public ImportExcel(File file, int headerNum, int sheetIndex)
 			throws InvalidFormatException, IOException {
-		this(file.getName(), new FileInputStream(file), headerNum, sheetIndex,column);
+		this(file.getName(), new FileInputStream(file), headerNum, sheetIndex);
 	}
 	
 	/**
@@ -116,7 +116,7 @@ public class ImportExcel {
 	 */
 	public ImportExcel(MultipartFile multipartFile, int headerNum, int sheetIndex)
 			throws InvalidFormatException, IOException {
-		this(multipartFile.getOriginalFilename(), multipartFile.getInputStream(), headerNum, sheetIndex,0);
+		this(multipartFile.getOriginalFilename(), multipartFile.getInputStream(), headerNum, sheetIndex);
 	}
 
 	/**
@@ -127,7 +127,7 @@ public class ImportExcel {
 	 * @throws InvalidFormatException 
 	 * @throws IOException 
 	 */
-	public ImportExcel(String fileName, InputStream is, int headerNum, int sheetIndex,int column)
+	public ImportExcel(String fileName, InputStream is, int headerNum, int sheetIndex)
 			throws InvalidFormatException, IOException {
 		if (StringUtils.isBlank(fileName)){
 			throw new RuntimeException("导入文档为空!");
@@ -287,7 +287,7 @@ public class ImportExcel {
 		List<E> dataList = Lists.newArrayList();
 		for (int i = this.getDataRowNum(); i < this.getLastDataRowNum(); i++) {
 			E e = (E)cls.newInstance();
-			int column = 1;
+			int column = 0;
 			Row row = this.getRow(i);
 			StringBuilder sb = new StringBuilder();
 			for (Object[] os : annotationList){
