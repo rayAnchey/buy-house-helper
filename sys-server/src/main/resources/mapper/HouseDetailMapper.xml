@@ -161,4 +161,18 @@
       update_time = #{updateTime,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=VARCHAR}
   </update>
+  <insert id="batchSave" parameterType="java.util.List">
+        insert into house_detail (id, project_id, project_name,
+      buind_no, house_no, area,
+      price, total, public_time,
+      add_time, update_time)
+    values
+    <foreach collection="list" separator="," item="house">
+      (#{house.id,jdbcType=VARCHAR}, #{house.projectId,jdbcType=VARCHAR}, #{house.projectName,jdbcType=VARCHAR},
+      #{house.buindNo,jdbcType=VARCHAR}, #{house.houseNo,jdbcType=VARCHAR}, #{house.area,jdbcType=DECIMAL},
+      #{house.price,jdbcType=DECIMAL}, #{house.total,jdbcType=DECIMAL}, #{house.publicTime,jdbcType=TIMESTAMP},
+      #{house.addTime,jdbcType=TIMESTAMP}, #{house.updateTime,jdbcType=TIMESTAMP})
+    </foreach>
+
+  </insert>
 </mapper>

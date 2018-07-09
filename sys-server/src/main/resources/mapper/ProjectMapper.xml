@@ -3,7 +3,7 @@
 <mapper namespace="cn.deskie.sysserver.mapper.ProjectMapper">
   <resultMap id="BaseResultMap" type="cn.deskie.sysentity.entity.Project">
     <id column="id" jdbcType="VARCHAR" property="id" />
-    <result column="batch_no" jdbcType="VARCHAR" property="batchNo" />
+    <result column="batch_no" jdbcType="INTEGER" property="batchNo" />
     <result column="batch_id" jdbcType="VARCHAR" property="batchId" />
     <result column="project_name" jdbcType="VARCHAR" property="projectName" />
     <result column="developer" jdbcType="VARCHAR" property="developer" />
@@ -36,7 +36,7 @@
       build_no, area_no, count, 
       public_time, add_time, update_time
       )
-    values (#{id,jdbcType=VARCHAR}, #{batchNo,jdbcType=VARCHAR}, #{batchId,jdbcType=VARCHAR}, 
+    values (#{id,jdbcType=VARCHAR}, #{batchNo,jdbcType=INTEGER}, #{batchId,jdbcType=VARCHAR},
       #{projectName,jdbcType=VARCHAR}, #{developer,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR}, #{projectType,jdbcType=VARCHAR},
       #{buildNo,jdbcType=VARCHAR}, #{areaNo,jdbcType=VARCHAR}, #{count,jdbcType=INTEGER}, 
       #{publicTime,jdbcType=TIMESTAMP}, #{addTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}
@@ -47,7 +47,7 @@
     update project
     <set>
       <if test="batchNo != null">
-        batch_no = #{batchNo,jdbcType=VARCHAR},
+        batch_no = #{batchNo,jdbcType=INTEGER},
       </if>
       <if test="batchId != null">
         batch_id = #{batchId,jdbcType=VARCHAR},
@@ -87,7 +87,7 @@
   </update>
   <update id="updateByPrimaryKey" parameterType="cn.deskie.sysentity.entity.Project">
     update project
-    set batch_no = #{batchNo,jdbcType=VARCHAR},
+    set batch_no = #{batchNo,jdbcType=INTEGER},
       batch_id = #{batchId,jdbcType=VARCHAR},
       project_name = #{projectName,jdbcType=VARCHAR},
       developer = #{developer,jdbcType=VARCHAR},
@@ -101,4 +101,19 @@
       update_time = #{updateTime,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=VARCHAR}
   </update>
+  <insert id="batchSave" parameterType="java.util.List">
+        insert into project (id, batch_no, batch_id,
+      project_name, developer, address, project_type,
+      build_no, area_no, count,
+      public_time, add_time, update_time
+      )
+    values
+    <foreach collection="list" separator="," item="project">
+      (#{project.id,jdbcType=VARCHAR}, #{project.batchNo,jdbcType=INTEGER}, #{project.batchId,jdbcType=VARCHAR},
+      #{project.projectName,jdbcType=VARCHAR}, #{project.developer,jdbcType=VARCHAR}, #{project.address,jdbcType=VARCHAR}, #{project.projectType,jdbcType=VARCHAR},
+      #{project.buildNo,jdbcType=VARCHAR}, #{project.areaNo,jdbcType=VARCHAR}, #{project.count,jdbcType=INTEGER},
+      #{project.publicTime,jdbcType=TIMESTAMP}, #{project.addTime,jdbcType=TIMESTAMP}, #{project.updateTime,jdbcType=TIMESTAMP}
+      )
+    </foreach>
+  </insert>
 </mapper>

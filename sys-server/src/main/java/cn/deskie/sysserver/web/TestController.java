@@ -1,7 +1,11 @@
 package cn.deskie.sysserver.web;
 
 import cn.deskie.sysentity.User;
+import cn.deskie.sysentity.entity.Project;
 import cn.deskie.sysinterface.service.TestInterface;
+import cn.deskie.sysinterface.service.business.BatchService;
+import cn.deskie.sysinterface.service.business.HouseDetailService;
+import cn.deskie.sysinterface.service.business.ProjectService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,6 +33,12 @@ public class TestController {
 
     @Autowired
     private TestInterface testInterface;
+    @Autowired
+    private BatchService batchService;
+    @Autowired
+    private ProjectService projectService;
+    @Autowired
+    private HouseDetailService houseDetailService;
 
     @RequestMapping("/json")
     @ResponseBody
@@ -50,6 +60,28 @@ public class TestController {
     public String toMain(HttpServletRequest request,Model model){
         String basePath = request.getContextPath();
         model.addAttribute("basePath",basePath);
+        return "main";
+    }
+    @RequestMapping("/startBatch")
+    public String startBatch(HttpServletRequest request,Model model){
+        batchService.startCrawlerTask();
+        return "main";
+    }
+    @RequestMapping("/startdownload")
+    public String startdownload(){
+        batchService.downLoadAttachments();
+        return "main";
+    }
+
+    @RequestMapping("/startUnzip")
+    public String startUnzi(){
+        batchService.unZipAndSaveExcelToDB();
+        return "main";
+    }
+    @RequestMapping("/startHouseInfoTodb")
+    public String startHouseInfoTodb(){
+        Project project =projectService.getById("b63ce650910a456582d8986584ae035e");
+        houseDetailService.saveExcelToDB(project);
         return "main";
     }
 

@@ -1,5 +1,7 @@
 package cn.deskie.sysentity.entity;
 
+import cn.deskie.syscommon.excel.annotation.ExcelField;
+
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
@@ -29,7 +31,7 @@ public class HouseDetail implements Serializable  {
     private Date addTime;
 
     private Date updateTime;
-
+    @ExcelField(title="序号",type = 2,align=2, sort=1)
     public String getId() {
         return id;
     }
@@ -61,7 +63,7 @@ public class HouseDetail implements Serializable  {
     public void setBuindNo(String buindNo) {
         this.buindNo = buindNo;
     }
-
+    @ExcelField(title="房号",align=2, sort=2)
     public String getHouseNo() {
         return houseNo;
     }
@@ -69,7 +71,7 @@ public class HouseDetail implements Serializable  {
     public void setHouseNo(String houseNo) {
         this.houseNo = houseNo;
     }
-
+    @ExcelField(title="建筑面积（平方米）",align=2, sort=3)
     public BigDecimal getArea() {
         return area;
     }
@@ -77,7 +79,7 @@ public class HouseDetail implements Serializable  {
     public void setArea(BigDecimal area) {
         this.area = area;
     }
-
+    @ExcelField(title="单价（元/平方米）",align=2, sort=4)
     public BigDecimal getPrice() {
         return price;
     }
@@ -85,7 +87,7 @@ public class HouseDetail implements Serializable  {
     public void setPrice(BigDecimal price) {
         this.price = price;
     }
-
+    @ExcelField(title="房屋总价（元）",align=2, sort=5)
     public BigDecimal getTotal() {
         return total;
     }

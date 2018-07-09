@@ -84,7 +84,6 @@ public class BatchCrawler extends BreadthCrawler {
                 if (StringUtils.isNotBlank(href) && href.startsWith("/attached/file") && href.endsWith(".zip")) {
                     //确定时下载页面，收集批次信息
                     Map<String,Object> map = new HashMap<>();
-                    map.put("id",IdGen.uuid());
                     map.put("batchName",title);
                     map.put("pageUrl",baseUrl);
                     map.put("attachmentUrl",attachedUrl + href);

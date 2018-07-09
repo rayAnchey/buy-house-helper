@@ -1,6 +1,7 @@
 package cn.deskie.sysserver.mapper;
 
 import cn.deskie.sysentity.entity.Batch;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -18,4 +19,8 @@ public interface BatchMapper {
     int updateByPrimaryKey(Batch record);
 
     int batchSave(List<Batch> list);
+
+    Integer getMaxBatchNo();
+
+    List<Batch> findByProperty(@Param(value="propertyName")String propertyName, @Param(value="value")Object value);
 }

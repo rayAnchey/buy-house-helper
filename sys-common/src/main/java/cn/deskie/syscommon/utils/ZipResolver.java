@@ -10,9 +10,12 @@ import java.util.Enumeration;
 public class ZipResolver {
 
 
-    public static synchronized void unzip(String zipFileName, String extPlace)
-            throws Exception {
-        unZipFiles(zipFileName, extPlace);
+    public static synchronized boolean unzip(String zipFileName, String extPlace) {
+        try {
+            return unZipFiles(zipFileName, extPlace);
+        } catch (Exception e) {
+            return false;
+        }
     }
 
 

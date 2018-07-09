@@ -25,6 +25,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
+import java.math.BigDecimal;
 import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
 import java.util.Collections;
@@ -333,7 +334,9 @@ public class ImportExcel {
 						}else if (valType == Date.class){
 							SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd");
 							val=sdf.parse(val.toString()); 
-						}else {
+						}else if(valType == BigDecimal.class){
+							val=new BigDecimal(val.toString());
+						} else {
 							if (ef.fieldType() != Class.class){
 								val = ef.fieldType().getMethod("getValue", String.class).invoke(null, val.toString());
 							}else{

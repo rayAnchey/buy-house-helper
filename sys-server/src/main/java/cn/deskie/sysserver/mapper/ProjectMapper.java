@@ -2,6 +2,8 @@ package cn.deskie.sysserver.mapper;
 
 import cn.deskie.sysentity.entity.Project;
 
+import java.util.List;
+
 public interface ProjectMapper {
     int deleteByPrimaryKey(String id);
 
@@ -12,4 +14,6 @@ public interface ProjectMapper {
     int updateByPrimaryKeySelective(Project record);
 
     int updateByPrimaryKey(Project record);
+
+    int batchSave(List list);
 }

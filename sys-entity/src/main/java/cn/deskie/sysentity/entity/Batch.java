@@ -9,7 +9,9 @@ public class Batch implements Serializable{
 
     private String id;
 
-    private String reference;
+    private Integer batchNo;
+
+    private String referenceno;
 
     private String batchName;
 
@@ -37,12 +39,20 @@ public class Batch implements Serializable{
         this.id = id;
     }
 
-    public String getReference() {
-        return reference;
+    public Integer getBatchNo() {
+        return batchNo;
     }
 
-    public void setReference(String reference) {
-        this.reference = reference;
+    public void setBatchNo(Integer batchNo) {
+        this.batchNo = batchNo;
+    }
+
+    public String getReferenceno() {
+        return referenceno;
+    }
+
+    public void setReferenceno(String referenceno) {
+        this.referenceno = referenceno;
     }
 
     public String getBatchName() {
@@ -115,5 +125,20 @@ public class Batch implements Serializable{
 
     public void setUpdateTime(Date updateTime) {
         this.updateTime = updateTime;
+    }
+
+    public Batch clearProperties(){
+        this.batchNo = null;
+        this.referenceno = null;
+        this.batchName = null;
+        this.publicTime = null;
+        this.pageUrl = null;
+        this.attachmentUrl = null;
+        this.attachmentName = null;
+        this.isDownloaded = null;
+        this.isResolved = null;
+        this.addTime = null;
+        this.updateTime = null;
+        return this;
     }
 }

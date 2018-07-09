@@ -2,6 +2,7 @@ package cn.deskie.sysserver;
 
 import cn.deskie.syscommon.excel.ImportExcel;
 import cn.deskie.syscommon.utils.IdGen;
+import cn.deskie.sysentity.entity.HouseDetail;
 import cn.deskie.sysentity.entity.Project;
 import org.apache.commons.lang3.StringUtils;
 import org.junit.Test;
@@ -13,6 +14,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
@@ -37,6 +39,22 @@ public class SysServerApplicationTests {
 				project.setProjectType(projectType);
 				newList.add(project);
 			}
+		}
+		System.out.println(newList);
+	}
+
+	public static void main(String[] args) throws Exception{
+		File file = new File("D:\\opt\\git\\20180629182230_900_2886789\\房源清单\\北石桥村城改项目开发DK-4南区（华洲城·云顶）8#.xlsx");
+		ImportExcel ei = new ImportExcel(file, 2, 0);
+		List<HouseDetail> list = ei.getDataList(HouseDetail.class);
+		List<HouseDetail> newList = new ArrayList<>();
+		for(HouseDetail houseDetail :list){
+			houseDetail.setProjectId("projectId");
+			houseDetail.setProjectName("projectName");
+			houseDetail.setId(IdGen.uuid());
+			houseDetail.setPublicTime(new Date());
+			houseDetail.setBuindNo("8#".replace("#",""));
+			newList.add(houseDetail);
 		}
 		System.out.println(newList);
 	}

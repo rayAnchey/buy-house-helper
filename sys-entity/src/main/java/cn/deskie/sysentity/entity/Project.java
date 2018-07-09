@@ -12,7 +12,7 @@ public class Project implements Serializable {
 
     private String id;
 
-    private String batchNo;
+    private Integer batchNo;
 
     private String batchId;
 
@@ -44,11 +44,11 @@ public class Project implements Serializable {
         this.id = id;
     }
 
-    public String getBatchNo() {
+    public Integer getBatchNo() {
         return batchNo;
     }
 
-    public void setBatchNo(String batchNo) {
+    public void setBatchNo(Integer batchNo) {
         this.batchNo = batchNo;
     }
 
