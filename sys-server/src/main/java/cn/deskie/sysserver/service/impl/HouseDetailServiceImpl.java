@@ -8,6 +8,7 @@ import cn.deskie.sysentity.entity.Project;
 import cn.deskie.sysinterface.service.business.BatchService;
 import cn.deskie.sysinterface.service.business.HouseDetailService;
 import cn.deskie.sysserver.mapper.HouseDetailMapper;
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,8 +46,13 @@ public class HouseDetailServiceImpl implements HouseDetailService {
 
     @Override
     public int saveExcelToDB(Project project) {
-        String dirPath = batchService.findById(project.getBatchId()).getAttachmentName().replace(".zip", "") + File.separator + "房源清单";
-        File[] files = new File(dirPath).listFiles();
+        String dirName = "房源清单";
+        Batch batch = batchService.findById(project.getBatchId());
+        String dirPath = batch.getAttachmentName().replace(".zip", "") + File.separator  ;
+        File[] files = new File(dirPath+dirName).listFiles();
+        if(null==files){
+            files = new File(dirPath+batch.getBatchName()).listFiles();
+        }
         File houseFile = null;
         String projectId = project.getId();
         String projectName = project.getProjectName();
@@ -62,6 +68,9 @@ public class HouseDetailServiceImpl implements HouseDetailService {
                             List<HouseDetail> list = ei.getDataList(HouseDetail.class);
                             List<HouseDetail> newList = new ArrayList<>();
                             for (HouseDetail houseDetail : list) {
+                                if(StringUtils.isBlank(houseDetail.getHouseNo())){
+                                    continue;
+                                }
                                 houseDetail.setProjectId(projectId);
                                 houseDetail.setProjectName(projectName);
                                 houseDetail.setId(IdGen.uuid());

@@ -208,7 +208,7 @@ public class ImportExcel {
 				} else if (cell.getCellType() == Cell.CELL_TYPE_STRING) {
 					val = cell.getStringCellValue();
 				} else if (cell.getCellType() == Cell.CELL_TYPE_FORMULA) {
-					val = cell.getCellFormula();
+					val = cell.getNumericCellValue();
 				} else if (cell.getCellType() == Cell.CELL_TYPE_BOOLEAN) {
 					val = cell.getBooleanCellValue();
 				} else if (cell.getCellType() == Cell.CELL_TYPE_ERROR) {

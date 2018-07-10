@@ -49,10 +49,10 @@
 				<version>1.3.2</version>
 			</dependency>
 			<dependency>
-				<groupId>org.springframework.kafka</groupId>
-				<artifactId>spring-kafka</artifactId>
+				<groupId>org.rocketmq</groupId>
+				<artifactId>spring-boot-starter-rocketmq</artifactId>
+				<version>1.2.0.RELEASE</version>
 			</dependency>
-
 			<dependency>
 				<groupId>mysql</groupId>
 				<artifactId>mysql-connector-java</artifactId>
