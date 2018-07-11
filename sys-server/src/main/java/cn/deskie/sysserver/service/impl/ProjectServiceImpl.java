@@ -4,8 +4,10 @@ import cn.deskie.syscommon.excel.ImportExcel;
 import cn.deskie.syscommon.utils.IdGen;
 import cn.deskie.sysentity.entity.Batch;
 import cn.deskie.sysentity.entity.Project;
+import cn.deskie.sysinterface.service.business.BatchService;
 import cn.deskie.sysinterface.service.business.ProjectService;
 import cn.deskie.sysserver.mapper.ProjectMapper;
+import cn.deskie.sysserver.rocketmq.RocketMQServer;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -25,6 +27,12 @@ public class ProjectServiceImpl implements ProjectService {
     @Autowired
     private ProjectMapper projectMapper;
 
+    @Autowired
+    private RocketMQServer rocketMQServer;
+
+    @Autowired
+    private BatchService batchService;
+
     @Override
     public int save(Project project) {
         return projectMapper.insert(project);
@@ -36,7 +44,7 @@ public class ProjectServiceImpl implements ProjectService {
     }
 
     @Override
-    public int saveExcelToDB(Batch batch) {
+    public void saveExcelToDB(Batch batch) {
         File file = new File(batch.getAttachmentName().replace(".zip",""));
         File[] xlsxs = file.listFiles();
         for(File f:xlsxs){
@@ -78,8 +86,14 @@ public class ProjectServiceImpl implements ProjectService {
                         newList.add(project);
                     }
                 }
-                return newList.size()>0?projectMapper.batchSave(newList):0;
-
+                projectMapper.batchSave(newList);
+                //更新批次处理字段为已处理
+                batch.clearProperties().setIsResolved("1");
+                batchService.update(batch);
+                //继续处理
+                for(Project project:newList){
+                    rocketMQServer.sendMessage(project);
+                }
             }else {
                 logger.error("project excel 文件不存在："+file.getAbsolutePath());
             }
@@ -87,7 +101,6 @@ public class ProjectServiceImpl implements ProjectService {
         }catch (Exception e){
             logger.error("project excel 解析出错！"+e.getMessage());
         }
-        return 0;
     }
 
     @Override

@@ -44,7 +44,7 @@ public class SysServerApplicationTests {
 	}
 
 	public static void main(String[] args) throws Exception{
-		File file = new File("D:\\opt\\git\\20180629182230_900_2886789\\房源清单\\北石桥村城改项目开发DK-4南区（华洲城·云顶）8#.xlsx");
+		File file = new File("D:\\opt\\filedown\\20180518160148_315_2836375\\商品住房价格公示项目名单（2018年第23批）（总第三十五批）\\5、御景·水岸花园（桃源漫步）6#.xlsx");
 		ImportExcel ei = new ImportExcel(file, 2, 0);
 		List<HouseDetail> list = ei.getDataList(HouseDetail.class);
 		List<HouseDetail> newList = new ArrayList<>();

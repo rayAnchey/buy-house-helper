@@ -9,6 +9,7 @@ import cn.deskie.sysentity.entity.Project;
 import cn.deskie.sysinterface.service.business.BatchService;
 import cn.deskie.sysinterface.service.business.ProjectService;
 import cn.deskie.sysserver.mapper.BatchMapper;
+import cn.deskie.sysserver.rocketmq.RocketMQServer;
 import org.apache.commons.collections4.MapUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
@@ -32,7 +33,7 @@ public class BatchServiceImpl implements BatchService {
     @Autowired
     private BatchMapper batchMapper;
     @Autowired
-    private ProjectService projectService;
+    private RocketMQServer rocketMQServer;
 
     @Override
     public void startCrawlerTask() {
@@ -85,14 +86,16 @@ public class BatchServiceImpl implements BatchService {
             batch.setAddTime(new Date());
             batchList.add(batch);
         }
-        return batchList.size()>0?batchMapper.batchSave(batchList):0;
+        int num = batchList.size()>0?batchMapper.batchSave(batchList):0;
+        //发送mq批次信息，继续处理附件
+        for(Batch batch:batchList){
+            rocketMQServer.sendMessage(batch);
+        }
+        return num;
     }
 
     @Override
-    public void downLoadAttachments() {
-        //查询数据库所有未下载的batch
-        List<Batch>  list = findByProperty("is_downloaded","0");
-        for(Batch batch:list){
+    public void downLoadAttachments(Batch batch) {
             String fileName = StringUtils.substringAfterLast(batch.getAttachmentUrl(),"/");
             boolean success = HttpDownLoadUtils.downLoadFromUrl(batch.getAttachmentUrl(),fileName,sotrePath);
             if(success){
@@ -102,30 +105,18 @@ public class BatchServiceImpl implements BatchService {
                 batch.setAttachmentName(sotrePath+fileName);
                 batch.setUpdateTime(new Date());
                 batchMapper.updateByPrimaryKeySelective(batch);
+                if(batch.getBatchNo()<2018023){
+                    //20批之前的excel格式不一样暂不入库
+                    return;
+                }
+                String attachName = batch.getAttachmentName();
+                ZipResolver.unzip(attachName,attachName.replace(".zip",""));
+                batch = batchMapper.selectByPrimaryKey(batch.getId());
+                rocketMQServer.sendMessage(batch);
             }
-        }
     }
 
-    @Override
-    public void unZipAndSaveExcelToDB() {
-        List<Batch>  list = findByProperty("is_resolved","0");
-        for(Batch batch:list){
-            //解压文件
-            if(batch.getBatchNo()<2018020){
-                //20批之前的excel格式不一样暂不入库
-                continue;
-            }
-            String attachName = batch.getAttachmentName();
-            boolean success = ZipResolver.unzip(attachName,attachName.replace(".zip",""));
-            if(success){
-                //读取excle的project内容并入库
-                int num = projectService.saveExcelToDB(batch);
-                if(num>0){
-                    logger.info("project入库成功:{}条",num);
-                }
-            }
-        }
-    }
+
 
     @Override
     public List<Batch> findByProperty(String propertyName,Object value) {
@@ -135,6 +126,11 @@ public class BatchServiceImpl implements BatchService {
     @Override
     public Batch findById(String id) {
         return batchMapper.selectByPrimaryKey(id);
+    }
+
+    @Override
+    public int update(Batch batch) {
+        return batchMapper.updateByPrimaryKeySelective(batch);
     }
 
     private Integer getBatchNoFromTitle(String title) {

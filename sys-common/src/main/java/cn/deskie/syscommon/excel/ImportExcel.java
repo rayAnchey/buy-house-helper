@@ -345,8 +345,7 @@ public class ImportExcel {
 							}
 						}
 					} catch (Exception ex) {
-						log.info("Get cell value ["+i+","+column+"] error: " + ex.toString());
-						val = null;
+						break;
 					}
 					// set entity value
 					if (os[1] instanceof Field){

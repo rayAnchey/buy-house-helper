@@ -1,25 +1,35 @@
 package cn.deskie.sysserver.rocketmq;
 
-
-import org.apache.rocketmq.client.consumer.DefaultMQPushConsumer;
-import org.apache.rocketmq.client.consumer.listener.ConsumeConcurrentlyStatus;
-import org.apache.rocketmq.client.consumer.listener.MessageListenerConcurrently;
-import org.apache.rocketmq.common.consumer.ConsumeFromWhere;
-import org.apache.rocketmq.common.message.MessageExt;
+import cn.deskie.sysentity.entity.Batch;
+import cn.deskie.sysentity.entity.HouseDetail;
+import cn.deskie.sysentity.entity.Project;
+import com.alibaba.fastjson.JSON;
+import org.apache.rocketmq.client.exception.MQClientException;
+import org.apache.rocketmq.client.producer.DefaultMQProducer;
+import org.apache.rocketmq.client.producer.SendCallback;
+import org.apache.rocketmq.client.producer.SendResult;
+import org.apache.rocketmq.common.message.Message;
 import org.apache.rocketmq.remoting.common.RemotingHelper;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
+import org.springframework.util.StopWatch;
 
 import javax.annotation.PostConstruct;
-
+import javax.annotation.PreDestroy;
 
 @Component
 public class RocketMQServer {
     /**
-     * 消费者的组名
+     * 生产者的组名
      */
-    @Value("${apache.rocketmq.consumer.PushConsumer}")
-    private String consumerGroup;
+    @Value("${apache.rocketmq.producer.producerGroup}")
+    private String producerGroup;
+
+    private final DefaultMQProducer producer = new DefaultMQProducer(producerGroup);
+
+    private static final Logger logger = LoggerFactory.getLogger(RocketMQServer.class);
 
     /**
      * NameServer 地址
@@ -28,38 +38,62 @@ public class RocketMQServer {
     private String namesrvAddr;
 
     @PostConstruct
-    public void defaultMQPushConsumer() {
-        //消费者的组名
-        DefaultMQPushConsumer consumer = new DefaultMQPushConsumer(consumerGroup);
-
+    public void defaultMQProducer() {
         //指定NameServer地址，多个地址以 ; 隔开
-        consumer.setNamesrvAddr(namesrvAddr);
+        producer.setNamesrvAddr(namesrvAddr);
         try {
-            //订阅PushTopic下Tag为push的消息
-            consumer.subscribe("TopicTest", "push");
-
-            //设置Consumer第一次启动是从队列头部开始消费还是队列尾部开始消费
-            //如果非第一次启动，那么按照上次消费的位置继续消费
-            consumer.setConsumeFromWhere(ConsumeFromWhere.CONSUME_FROM_FIRST_OFFSET);
-            consumer.registerMessageListener((MessageListenerConcurrently) (list, context) -> {
-                try {
-                    for (MessageExt messageExt : list) {
-
-                        System.out.println("messageExt: " + messageExt);//输出消息内容
-
-                        String messageBody = new String(messageExt.getBody(), RemotingHelper.DEFAULT_CHARSET);
-
-                        System.out.println("消费响应：msgId : " + messageExt.getMsgId() + ",  msgBody : " + messageBody);//输出消息内容
-                    }
-                } catch (Exception e) {
-                    e.printStackTrace();
-                    return ConsumeConcurrentlyStatus.RECONSUME_LATER; //稍后再试
+            logger.info("MQ:生产者启动中...");
+            producer.setProducerGroup(producerGroup);
+            producer.start();
+            logger.info("MQ:生产者启动成功...");
+        } catch (MQClientException e) {
+            logger.info("MQ:生产者启动失败："+e.getErrorMessage());
+        }
+    }
+    public void sendMessage(Object data) {
+        try {
+            String tags = "";
+            String key = "";
+            if(data instanceof Batch){
+                if("0".equals(((Batch) data).getIsDownloaded())){
+                    tags = "attch";
+                }else {
+                    tags = "project";
                 }
-                return ConsumeConcurrentlyStatus.CONSUME_SUCCESS; //消费成功
+                key = ((Batch) data).getId();
+
+            }else if(data instanceof Project){
+                tags = "houseInfo";
+                key = ((Project) data).getId();
+            }else {
+                throw new IllegalArgumentException("MQ发送消息传入消息体类型错误:"+data.getClass());
+            }
+            byte[] messageBody = JSON.toJSONString(data).getBytes(RemotingHelper.DEFAULT_CHARSET);
+
+            Message mqMsg = new Message("violet", tags, key, messageBody);
+
+            producer.send(mqMsg, new SendCallback() {
+                @Override
+                public void onSuccess(SendResult sendResult) {
+                    logger.info("MQ: 生产者发送消息成功： {}", sendResult);
+                }
+
+                @Override
+                public void onException(Throwable throwable) {
+                    logger.error("MQ: 生产者发送消息失败："+throwable.getMessage(), throwable);
+                }
             });
-            consumer.start();
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.error(e.getMessage(), e);
+        }
+
+    }
+
+    @PreDestroy
+    public void stop() {
+        if (producer != null) {
+            producer.shutdown();
+            logger.info("MQ：关闭生产者");
         }
     }
 }

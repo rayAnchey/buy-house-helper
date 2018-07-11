@@ -128,7 +128,6 @@ public class Batch implements Serializable{
     }
 
     public Batch clearProperties(){
-        this.batchNo = null;
         this.referenceno = null;
         this.batchName = null;
         this.publicTime = null;

@@ -18,7 +18,7 @@ public class BatchCrawlerTask {
     /**
      * 批次爬虫定时任务
      */
-    @Scheduled(cron = "* * 0/6 * * *")
+//    @Scheduled(cron = "* * 0/6 * * *")
     public void start(){
         logger.info("开始执行批次爬虫定时任务。。。");
         batchService.startCrawlerTask();

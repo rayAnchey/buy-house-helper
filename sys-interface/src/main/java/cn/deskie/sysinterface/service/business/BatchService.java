@@ -9,8 +9,8 @@ public interface BatchService {
     void startCrawlerTask();
     int save(Batch batch);
     int BatchSave(List<Map> list);
-    void downLoadAttachments();
-    void unZipAndSaveExcelToDB();
+    void downLoadAttachments(Batch batch);
     List<Batch> findByProperty(String propertyName,Object value);
     Batch findById(String id);
+    int update(Batch batch);
 }
