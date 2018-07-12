@@ -6,16 +6,16 @@
     <meta name="description" content="后台信息管理">
     <title>登录</title>
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
-    <link rel="shortcut icon" type="image/x-icon" th:href="@{${basePath}+'/resources/common/favicon.ico'}" media="screen"/>
-    <link rel="stylesheet" th:href="@{${basePath}+'/resources/adminlte/bootstrap/css/bootstrap.min.css'}">
-    <link rel="stylesheet" th:href="@{${basePath}+'/resources/common/libs/font-awesome/css/font-awesome.min.css'}">
-    <link rel="stylesheet" th:href="@{${basePath}+'/resources/common/libs/ionicons/css/ionicons.min.css'}">
-    <link rel="stylesheet" th:href="@{${basePath}+'/resources/adminlte/dist/css/AdminLTE.min.css'}">
-    <link rel="stylesheet" th:href="@{${basePath}+'/resources/adminlte/plugins/iCheck/square/red.css'}">
-    <link rel="stylesheet" th:href="@{${basePath}+'/resources/adminlte/plugins/bootstrap-validator/dist/css/bootstrap-validator.css'}"/>
+    <link rel="shortcut icon" type="image/x-icon" th:href="@{${basePath}+'/common/favicon.ico'}" media="screen"/>
+    <link rel="stylesheet" th:href="@{${basePath}+'/adminlte/bootstrap/css/bootstrap.min.css'}">
+    <link rel="stylesheet" th:href="@{${basePath}+'/common/libs/font-awesome/css/font-awesome.min.css'}">
+    <link rel="stylesheet" th:href="@{${basePath}+'/common/libs/ionicons/css/ionicons.min.css'}">
+    <link rel="stylesheet" th:href="@{${basePath}+'/adminlte/dist/css/AdminLTE.min.css'}">
+    <link rel="stylesheet" th:href="@{${basePath}+'/adminlte/plugins/iCheck/square/red.css'}">
+    <link rel="stylesheet" th:href="@{${basePath}+'/adminlte/plugins/bootstrap-validator/dist/css/bootstrap-validator.css'}"/>
 
-    <script th:src="@{${basePath}+'/resources/common/libs/html5shiv/html5shiv.min.js'}"></script>
-    <script th:src="@{${basePath}+'/resources/common/libs/respond/respond.min.js'}"></script>
+    <script th:src="@{${basePath}+'/common/libs/html5shiv/html5shiv.min.js'}"></script>
+    <script th:src="@{${basePath}+'/common/libs/respond/respond.min.js'}"></script>
 </head>
 <body class="hold-transition login-page">
 <div class="login-box">
@@ -23,7 +23,7 @@
         <a href="#"><b>Admin</b>EAP</a>
     </div>
     <div class="login-box-body">
-        <p class="login-box-msg">测试账号 test/bill</p>
+        <p class="login-box-msg"></p>
 
         <form action="${basePath}/login" method="post" id="login-form">
             <div class="form-group has-feedback">
@@ -60,33 +60,20 @@
         </form>
 
 
-        <div class="social-auth-links" style="margin-bottom: 0px;">
-            <div class="row">
-                <div class="col-xs-5">
-                    <div class="text-left" style="margin-top: 5px;">快速登录</div>
-                </div>
-                <div class="col-xs-7">
-                    <div class="text-right">
-
-                    </div>
-                </div>
-            </div>
-            <!-- /.social-auth-links -->
-        </div>
         <!-- /.login-box-body -->
     </div>
     <!-- /.login-box -->
 </div>
     <!-- jQuery 2.2.3 -->
-    <script th:src="@{${basePath}+'/resources/adminlte/plugins/jQuery/jquery-2.2.3.min.js'}"></script>
+    <script th:src="@{${basePath}+'/adminlte/plugins/jQuery/jquery-2.2.3.min.js'}"></script>
     <!-- Bootstrap 3.3.6 -->
-    <script th:src="@{${basePath}+'/resources/adminlte/bootstrap/js/bootstrap.min.js'}"></script>
+    <script th:src="@{${basePath}+'/adminlte/bootstrap/js/bootstrap.min.js'}"></script>
     <!-- iCheck -->
-    <script th:src="@{${basePath}+'/resources/adminlte/plugins/iCheck/icheck.min.js'}"></script>
+    <script th:src="@{${basePath}+'/adminlte/plugins/iCheck/icheck.min.js'}"></script>
     <!-- bootstrap-validator-->
-    <script th:src="@{${basePath}+'/resources/adminlte/plugins/bootstrap-validator/dist/js/bootstrap-validator.js'}"></script>
+    <script th:src="@{${basePath}+'/adminlte/plugins/bootstrap-validator/dist/js/bootstrap-validator.js'}"></script>
     <!--login.js-->
-    <script th:src="@{${basePath}+'/resources/common/js/login.js'}"></script>
+    <script th:src="@{${basePath}+'/common/js/login.js'}"></script>
     <script>
         $(function () {
             $('input').iCheck({

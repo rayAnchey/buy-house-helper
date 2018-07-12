@@ -18,4 +18,13 @@ public class LoginController {
         return "main";
     }
 
+    @RequestMapping(value = "/register",method = RequestMethod.GET)
+    public String toRegister(){
+        return "register";
+    }
+    @RequestMapping(value = "/register",method = RequestMethod.POST)
+    public String register(){
+        return "login";
+    }
+
 }
