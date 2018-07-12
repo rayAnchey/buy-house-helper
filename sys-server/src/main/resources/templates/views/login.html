@@ -1,43 +1,27 @@
-<!--login_page_identity-->
-<!--以上文件注释不可去掉，校验文件首页用,详见base.js的jquery.fn.load-->
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="baidu_union_verify" content="804240c1607916fb8a8b98c6bcd2cfdb">
-    <meta name="keywords" content="AdminLTE,AdminEAP,AdminLTE框架">
-    <meta name="description" content="基于AdminLTE的快速开发框架,让web开发更简单">
-    <meta property="wb:webmaster" content="4f7a2b4a630250fe" />
-    <title>AdminEAP | 登录</title>
-    <!-- Tell the browser to be responsive to screen width -->
+    <meta name="description" content="后台信息管理">
+    <title>登录</title>
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
-    <!--icon-->
-    <link rel="shortcut icon" type="image/x-icon" href="${basePath}/resources/common/favicon.ico" media="screen"/>
-    <!-- Bootstrap 3.3.6 -->
-    <link rel="stylesheet" href="${basePath}/resources/adminlte/bootstrap/css/bootstrap.min.css">
-    <link rel="stylesheet" href="${basePath}/resources/common/libs/font-awesome/css/font-awesome.min.css">
-    <!-- Ionicons -->
-    <link rel="stylesheet" href="${basePath}/resources/common/libs/ionicons/css/ionicons.min.css">
-    <!-- Theme style -->
-    <link rel="stylesheet" href="${basePath}/resources/adminlte/dist/css/AdminLTE.min.css">
-    <!-- iCheck -->
-    <link rel="stylesheet" href="${basePath}/resources/adminlte/plugins/iCheck/square/red.css">
-    <link rel="stylesheet" href="${basePath}/resources/adminlte/plugins/bootstrap-validator/dist/css/bootstrap-validator.css"/>
+    <link rel="shortcut icon" type="image/x-icon" th:href="@{${basePath}+'/resources/common/favicon.ico'}" media="screen"/>
+    <link rel="stylesheet" th:href="@{${basePath}+'/resources/adminlte/bootstrap/css/bootstrap.min.css'}">
+    <link rel="stylesheet" th:href="@{${basePath}+'/resources/common/libs/font-awesome/css/font-awesome.min.css'}">
+    <link rel="stylesheet" th:href="@{${basePath}+'/resources/common/libs/ionicons/css/ionicons.min.css'}">
+    <link rel="stylesheet" th:href="@{${basePath}+'/resources/adminlte/dist/css/AdminLTE.min.css'}">
+    <link rel="stylesheet" th:href="@{${basePath}+'/resources/adminlte/plugins/iCheck/square/red.css'}">
+    <link rel="stylesheet" th:href="@{${basePath}+'/resources/adminlte/plugins/bootstrap-validator/dist/css/bootstrap-validator.css'}"/>
 
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-    <script src="${basePath}/resources/common/libs/html5shiv/html5shiv.min.js"></script>
-    <script src="${basePath}/resources/common/libs/respond/respond.min.js"></script>
-    <![endif]-->
+    <script th:src="@{${basePath}+'/resources/common/libs/html5shiv/html5shiv.min.js'}"></script>
+    <script th:src="@{${basePath}+'/resources/common/libs/respond/respond.min.js'}"></script>
 </head>
 <body class="hold-transition login-page">
 <div class="login-box">
     <div class="login-logo">
         <a href="#"><b>Admin</b>EAP</a>
     </div>
-    <!-- /.login-logo -->
     <div class="login-box-body">
         <p class="login-box-msg">测试账号 test/bill</p>
 
@@ -63,7 +47,7 @@
                     <div class="checkbox pull-right">
                         <a href="#">忘记密码</a>
                         <span>&nbsp;/&nbsp;</span>
-                        <a href="${basePath}/register" class="text-center">注册</a>
+                        <a th:href="@{${basePath}+'/register'}" class="text-center">注册</a>
                     </div>
                 </div>
                 <!-- /.col -->
@@ -83,13 +67,7 @@
                 </div>
                 <div class="col-xs-7">
                     <div class="text-right">
-                        <!--<a class="btn btn-social-icon btn-primary"><i class="fa fa-qq"></i></a>
-                        <a class="btn btn-social-icon btn-success"><i class="fa fa-wechat"></i></a>
-                        <a class="btn btn-social-icon btn-warning"><i class="fa fa-weibo"></i></a>
-                        <a class="btn btn-social-icon btn-info"><i class="fa fa-github"></i></a>-->
-                        <#list oAuthServices as oauth>
-                            <a class="btn btn-social-icon ${oauth.btnClass}" href="${oauth.authorizationUrl}"><i class="fa fa-${oauth.oAuthType}"></i></a>
-                        </#list>
+
                     </div>
                 </div>
             </div>
@@ -100,15 +78,15 @@
     <!-- /.login-box -->
 </div>
     <!-- jQuery 2.2.3 -->
-    <script src="${basePath}/resources/adminlte/plugins/jQuery/jquery-2.2.3.min.js"></script>
+    <script th:src="@{${basePath}+'/resources/adminlte/plugins/jQuery/jquery-2.2.3.min.js'}"></script>
     <!-- Bootstrap 3.3.6 -->
-    <script src="${basePath}/resources/adminlte/bootstrap/js/bootstrap.min.js"></script>
+    <script th:src="@{${basePath}+'/resources/adminlte/bootstrap/js/bootstrap.min.js'}"></script>
     <!-- iCheck -->
-    <script src="${basePath}/resources/adminlte/plugins/iCheck/icheck.min.js"></script>
+    <script th:src="@{${basePath}+'/resources/adminlte/plugins/iCheck/icheck.min.js'}"></script>
     <!-- bootstrap-validator-->
-    <script src="${basePath}/resources/adminlte/plugins/bootstrap-validator/dist/js/bootstrap-validator.js"></script>
+    <script th:src="@{${basePath}+'/resources/adminlte/plugins/bootstrap-validator/dist/js/bootstrap-validator.js'}"></script>
     <!--login.js-->
-    <script src="${basePath}/resources/common/js/login.js"></script>
+    <script th:src="@{${basePath}+'/resources/common/js/login.js'}"></script>
     <script>
         $(function () {
             $('input').iCheck({
@@ -141,15 +119,6 @@
                     }
                 }
             });
-
-            <#if message??>
-                new LoginValidator({
-                    code:"${message.code?default('-1')}",
-                    message:"${message.message?default('')}",
-                    userName:'userName',
-                    password:'password'
-                });
-            </#if>
         });
 
 

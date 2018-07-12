@@ -1,4 +1,4 @@
-package cn.deskie.sysserver.Task;
+package cn.deskie.sysserver.task;
 
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;

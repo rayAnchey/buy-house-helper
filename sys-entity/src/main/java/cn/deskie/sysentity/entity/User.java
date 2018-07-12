@@ -2,6 +2,7 @@ package cn.deskie.sysentity.entity;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 public class User implements Serializable {
 
@@ -31,6 +32,8 @@ public class User implements Serializable {
     private Date addTime;
 
     private Date updateTime;
+
+    private List<Role> roleList;
 
     public String getId() {
         return id;
@@ -126,5 +129,13 @@ public class User implements Serializable {
 
     public void setUpdateTime(Date updateTime) {
         this.updateTime = updateTime;
+    }
+
+    public List<Role> getRoleList() {
+        return roleList;
+    }
+
+    public void setRoleList(List<Role> roleList) {
+        this.roleList = roleList;
     }
 }
