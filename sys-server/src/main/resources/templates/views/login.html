@@ -25,7 +25,7 @@
     <div class="login-box-body">
         <p class="login-box-msg"></p>
 
-        <form action="${basePath}/login" method="post" id="login-form">
+        <form th:action="@{${basePath}+'/login'}" method="post" id="login-form">
             <div class="form-group has-feedback">
                 <input type="text" class="form-control"  name="userName" placeholder="请输入登录邮箱/登录名">
                 <span class="glyphicon glyphicon-envelope form-control-feedback"></span>

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -9,24 +9,24 @@
     <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <!--icon-->
-    <link rel="shortcut icon" type="image/x-icon" href="${basePath}/resources/common/favicon.ico" media="screen"/>
+    <link rel="shortcut icon" type="image/x-icon" th:href="@{${basePath}+'/common/favicon.ico'}" media="screen"/>
     <!-- Bootstrap 3.3.6 -->
-    <link rel="stylesheet" href="${basePath}/resources/adminlte/bootstrap/css/bootstrap.min.css">
-    <link rel="stylesheet" href="${basePath}/resources/common/libs/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" th:href="@{${basePath}+'/adminlte/bootstrap/css/bootstrap.min.css'}">
+    <link rel="stylesheet" th:href="@{${basePath}+'/common/libs/font-awesome/css/font-awesome.min.css'}">
     <!-- Ionicons -->
-    <link rel="stylesheet" href="${basePath}/resources/common/libs/ionicons/css/ionicons.min.css">
+    <link rel="stylesheet" th:href="@{${basePath}+'/common/libs/ionicons/css/ionicons.min.css'}">
     <!-- Theme style -->
-    <link rel="stylesheet" href="${basePath}/resources/adminlte/dist/css/AdminLTE.min.css">
+    <link rel="stylesheet" th:href="@{${basePath}+'/adminlte/dist/css/AdminLTE.min.css'}">
     <!-- iCheck -->
-    <link rel="stylesheet" href="${basePath}/resources/adminlte/plugins/iCheck/square/red.css">
+    <link rel="stylesheet" th:href="@{${basePath}+'/adminlte/plugins/iCheck/square/red.css'}">
     <link rel="stylesheet"
-          href="${basePath}/resources/adminlte/plugins/bootstrap-validator/dist/css/bootstrap-validator.css"/>
+          th:href="@{${basePath}+'/adminlte/plugins/bootstrap-validator/dist/css/bootstrap-validator.css'}"/>
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
-    <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
-    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js'}"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js'}"></script>
     <![endif]-->
 </head>
 <body class="hold-transition login-page">
@@ -38,15 +38,13 @@
     <div class="login-box-body">
         <p class="login-box-msg"><strong>新用户注册</strong></p>
 
-        <form action="${basePath}/oauth/register" method="post" id="register-form">
-            <input type="hidden" name="oAuthId" value="${oAuthInfo.oAuthId?default('-1')}">
-            <input type="hidden" name="oAuthType" value="${oAuthInfo.oAuthType?default('-1')}">
+        <form th:action="@{${basePath}+'/register'}" method="post" id="register-form">
             <div class="form-group has-feedback">
-                <input type="text" class="form-control" name="name" id="name" placeholder="请输入用户名" required>
+                <input type="text" class="form-control" name="username" id="username" placeholder="请输入用户名" required>
                 <span class="glyphicon glyphicon-user form-control-feedback"></span>
             </div>
             <div class="form-group has-feedback">
-                <input type="text" class="form-control" name="loginName" id="loginName" placeholder="请输入登录邮箱/登录名">
+                <input type="text" class="form-control" name="email" id="email" placeholder="请输入登录邮箱/登录名">
                 <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
             </div>
             <div class="form-group has-feedback">
@@ -76,16 +74,16 @@
     </div>
 </div>
 <!-- jQuery 2.2.3 -->
-<script src="${basePath}/resources/adminlte/plugins/jQuery/jquery-2.2.3.min.js"></script>
+<script th:src="@{${basePath}+'/adminlte/plugins/jQuery/jquery-2.2.3.min.js'}"></script>
 <!-- Bootstrap 3.3.6 -->
-<script src="${basePath}/resources/adminlte/bootstrap/js/bootstrap.min.js"></script>
+<script th:src="@{${basePath}+'/adminlte/bootstrap/js/bootstrap.min.js'}"></script>
 <!-- iCheck -->
-<script src="${basePath}/resources/adminlte/plugins/iCheck/icheck.min.js"></script>
+<script th:src="@{${basePath}+'/adminlte/plugins/iCheck/icheck.min.js'}"></script>
 <!-- bootstrap-validator-->
-<script src="${basePath}/resources/adminlte/plugins/bootstrap-validator/dist/js/bootstrap-validator.js"></script>
-<!--<script type="text/javascript" src="${basePath}/resources/common/js/base.js"></script>-->
-<script type="text/javascript" src="${basePath}/resources/common/js/base-modal.js"></script>
-<script>
+<script th:src="@{${basePath}+'/adminlte/plugins/bootstrap-validator/dist/js/bootstrap-validator.js'}"></script>
+<!--<script type="text/javascript" th:src="@{${basePath}+'/common/js/base.js'}"></script>-->
+<script type="text/javascript" th:src="@{${basePath}+'/common/js/base-modal.js'}"></script>
+<script th:inline="javascript">
     $(function () {
         $('input.icheck').iCheck({
             checkboxClass: 'icheckbox_square-red',
@@ -102,7 +100,7 @@
                 valiadtor.defaultSubmit();
             },
             fields: {
-                name: {
+                username: {
                     validators: {
                         notEmpty: {
                             message: '用户名不能为空'
@@ -115,23 +113,20 @@
                         }
                     }
                 },
-                loginName: {
+                email: {
                     validators: {
                         notEmpty: {
-                            message: '登录邮箱名或用户名不能为空'
+                            message: '登录邮箱名不能为空'
                         },
-                        stringLength: {
-                            /*长度提示*/
-                            min: 4,
-                            max: 30,
-                            message: '用户名长度必须在4到30之间'
+                        emailAddress: {
+                            message: '邮箱地址格式有误'
                         },
-                        threshold: 4,//只有4个字符以上才发送ajax请求
+                        threshold: 7,//只有4个字符以上才发送ajax请求
                         remote: {
-                            url: "${basePath}/oauth/checkUnique",
+                            url: [[@{${basePath}+'checkUnique'}]],
                             data: function (validator) {
                                 return {
-                                    loginName: $("#loginName").val(),
+                                    loginName: $("#email").val(),
                                     userId: null
                                 };
                             },
@@ -152,7 +147,7 @@
                             message: '密码长度必须在6到30之间'
                         },
                         different: {//不能和用户名相同
-                            field: 'loginName',//需要进行比较的input name值
+                            field: 'username',//需要进行比较的input name值
                             message: '不能和用户名相同'
                         },
                         regexp: {
@@ -177,7 +172,7 @@
                             message: '两次密码不一致'
                         },
                         different: {//不能和用户名相同
-                            field: 'loginName',
+                            field: 'username',
                             message: '不能和用户名相同'
                         },
                         regexp: {//匹配规则

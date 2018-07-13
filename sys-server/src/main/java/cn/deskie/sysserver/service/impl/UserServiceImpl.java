@@ -1,5 +1,6 @@
 package cn.deskie.sysserver.service.impl;
 
+import cn.deskie.syscommon.utils.IdGen;
 import cn.deskie.sysentity.entity.User;
 import cn.deskie.sysinterface.service.system.UserService;
 import cn.deskie.sysserver.mapper.UserMapper;
@@ -42,8 +43,14 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public boolean save(User user) {
-        return userMapper.insert(user) == 1 ? true : false;
+    public String save(User user) {
+        user.setId(IdGen.uuid());
+        user.setAddTime(new Date());
+        user.setUserType(User.USER_TYPE_NORMAL);
+        user.setStatus(User.STATUS_UNCONFIRM);
+        user.setDelFlag("0");
+        userMapper.insert(user);
+        return user.getId();
     }
 
     @Override

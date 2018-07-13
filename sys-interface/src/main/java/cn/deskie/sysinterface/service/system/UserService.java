@@ -25,7 +25,7 @@ public interface UserService {
 	/**
 	 * 保存用户
 	 */
-	boolean save(User user);
+	String save(User user);
 	/**
 	 * 修改用户信息
 	 */

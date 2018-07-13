@@ -7,6 +7,12 @@ import java.util.List;
 public class User implements Serializable {
 
 
+    public static final String USER_TYPE_NORMAL = "1";//普通用户
+    public static final String USER_TYPE_ADMIN = "0";//管理员
+    public static final String STATUS_UNCONFIRM = "0";//已注册未验证邮箱
+    public static final String STATUS_CONFIRMED  = "1";//以验证邮箱
+    public static final String STATUS_DISABLE = "2";//已禁用
+
     private static final long serialVersionUID = 1159283406944293826L;
 
     private String id;
