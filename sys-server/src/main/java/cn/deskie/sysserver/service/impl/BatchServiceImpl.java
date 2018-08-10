@@ -104,11 +104,13 @@ public class BatchServiceImpl implements BatchService {
                 batch.setIsDownloaded("1");
                 batch.setAttachmentName(sotrePath+fileName);
                 batch.setUpdateTime(new Date());
-                batchMapper.updateByPrimaryKeySelective(batch);
                 if(batch.getBatchNo()<2018023){
-                    //20批之前的excel格式不一样暂不入库
+                    //20批之前的excel格式不一样暂不入库,将处理状态改为2，避免与定时任务冲突
+                    batch.setIsResolved("2");
+                    batchMapper.updateByPrimaryKeySelective(batch);
                     return;
                 }
+                batchMapper.updateByPrimaryKeySelective(batch);
                 String attachName = batch.getAttachmentName();
                 ZipResolver.unzip(attachName,attachName.replace(".zip",""));
                 batch = batchMapper.selectByPrimaryKey(batch.getId());

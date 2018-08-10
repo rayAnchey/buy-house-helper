@@ -7,9 +7,12 @@ import cn.deskie.sysinterface.service.business.BatchService;
 import cn.deskie.sysinterface.service.business.HouseDetailService;
 import cn.deskie.sysinterface.service.business.ProjectService;
 import cn.deskie.sysserver.rocketmq.RocketMQServer;
+import cn.deskie.sysserver.task.ResolveExcelTask;
+import cn.deskie.sysserver.utils.SpringContextUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -29,6 +32,7 @@ import java.util.Map;
  * description：
  */
 @Controller
+@RequestMapping("/test")
 public class TestController {
 
     private static final Logger logger = LoggerFactory.getLogger(TestController.class);
@@ -74,6 +78,8 @@ public class TestController {
     @RequestMapping("/startdownload")
     public String startdownload(){
 //        batchService.downLoadAttachments();
+        ResolveExcelTask resolveExcelTask = (ResolveExcelTask) SpringContextUtil.getBean("resolveExcelTask");
+        resolveExcelTask.start();
         return "main";
     }
 

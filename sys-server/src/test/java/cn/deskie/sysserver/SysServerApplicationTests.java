@@ -13,10 +13,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -57,6 +54,35 @@ public class SysServerApplicationTests {
 			newList.add(houseDetail);
 		}
 		System.out.println(newList);
+	}
+	@Test
+	public void test1() throws InterruptedException{
+		List list = Collections.synchronizedList(new ArrayList<>());
+		class Runner implements Runnable{
+
+			@Override
+			public void run() {
+				for(int i=0;i<1000;i++){
+					list.add(UUID.randomUUID());
+				}
+				System.out.println(list.size());
+				StringBuffer stringBuffer = new StringBuffer();
+				stringBuffer.append("");
+			}
+		}
+		Runnable runnable = () -> {
+			for(int i=0;i<1000;i++){
+				list.add(i);
+			}
+			System.out.println(list.size());
+        };
+		Thread thread1 = new Thread(runnable);
+		Thread thread2 = new Thread(runnable);
+		Thread thread3 = new Thread(runnable);
+		thread1.start();
+		thread2.start();
+		thread3.start();
+		System.out.println("final:"+list.size());
 	}
 
 }
